@@ -8,6 +8,7 @@
 
 3. Small chunks and commit often
 - run checks before each commit: `pre-commit run --all-files && pytest -q`
+- `git add <paths> && git commit --amend --no-edit` # when continuing work on same task without a new push
 
 4. Keep branch current
 - `git fetch origin`
