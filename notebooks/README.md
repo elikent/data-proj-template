@@ -1,0 +1,1 @@
+Exploration lives here. Move reusable code into src/PKG_NAME/.
