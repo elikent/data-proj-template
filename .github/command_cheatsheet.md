@@ -27,6 +27,24 @@
 - `gh pr merge --squash --delete-branch`
 # -- combines all commits from PR into one commit on main
 
+## If worked on main by accident
+1. Move local commit(s) off main 
+- `git switch -c chore/move-off-main`
+
+2. Reset local to match remote 
+- `git switch main`
+- `git fetch origin`
+- `git reset --hard origin/main`
+
+3. PR the branch back into main
+- `git switch chore/move-off-main` 
+- `gh pr create --fill --base main --head chore/move-off-main`
+- `gh pr merge --squash --delete-branch`
+
+4. Sync local main
+- `git switch main`
+- `git pull --ff-only`
+
 # Aliases
 ## One-time
 ```bash
