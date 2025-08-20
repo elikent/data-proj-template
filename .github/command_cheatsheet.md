@@ -2,6 +2,7 @@
 1. Sync main
 - `git switch main`
 - `git pull --ff-only`
+- `git fetch --prune` # keeps origin/ * tidy locally 
 
 2. Branch for the new task
 - `git switch -c <branch-type/desc>` # fix, chore or feat (docs, style, refactor, test)
@@ -44,6 +45,7 @@
 4. Sync local main
 - `git switch main`
 - `git pull --ff-only`
+- `git fetch --prune` # keeps origin/ * tidy locally 
 
 # Aliases
 ## One-time
@@ -64,7 +66,9 @@ git config --global alias.sw "switch"
 - `git status`
 - `git remote -v` # (gives origin for fetch and push)
 - `git branch`
-- `git branch -r` # remote branches
+- `git branch -r` # remote branches in local list
+- `git ls-remote --heads origin` # remote branches in remote list
+- `git fetch --prune` # update and prune stale remote-tracking branches
 
 ## Start new work
 - `git switch main`
@@ -124,6 +128,7 @@ git config --global alias.sw "switch"
 - `git branch -D name` # force delete local branch
 - `git push origin :name` # delete remote branch
 - `git fetch --all --prune` # update remotes, drop deleted refs
+- `git push origin --delete <branch-name>` # deletes branch on remote
 
 ## Remotes
 - `git remote add origin https://...git`
