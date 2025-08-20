@@ -76,9 +76,11 @@ git config --global alias.sw "switch"
 - `git revert <commit>` # make a new commit that undoes <commit>
 
 ## Reset (local rewrite; careful)
-- `git reset --soft <commit>`   # keep changes staged
-- `git reset --mixed <commit>`  # keep changes, unstage
-- `git reset --hard <commit>`   # discard changes; set HEAD/WT to <commit>
+# Reset moves branch/HEAD to <commit>
+                                #Staging Area/Working Tree (files)
+- `git reset --soft <commit>`   #Keeps/Keeps
+- `git reset --mixed <commit>`  #Unstages changes/Keeps
+- `git reset --hard <commit>`   #Resets to <commit>/Resets to <commit>
 - `git clean -fd`   # remove untracked files/dirs (dangerous)
 
 ## Keep branch current (rebasing)
