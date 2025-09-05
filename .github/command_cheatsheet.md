@@ -47,6 +47,13 @@
 - `git pull --ff-only`
 - `git fetch --prune` # keeps origin/ * tidy locally 
 
+# Create a remote repo and connect 
+## Create repo
+`gh repo create <repo-name> --public`
+## Connect
+`git remote add origin https://github.com/elikent/<repo-name>.git`
+
+
 # Aliases
 ## One-time
 ```bash
