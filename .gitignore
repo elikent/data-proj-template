@@ -10,7 +10,7 @@ output/
 artifacts/
 
 # Secrets
-config/secrets/
+/configs/secrets/
 
 # Test scripts
 tests/

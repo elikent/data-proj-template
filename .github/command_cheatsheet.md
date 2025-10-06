@@ -1,4 +1,38 @@
-# Workflow
+
+
+--- # workflow i like better --- 
+# start work on new feature
+`git switch -c <new-branch>`
+
+# checkpoint often
+`git add .`
+`git commit -m "wip: <what you did>"`
+
+# when done with significant part of task or step away - push to GH
+`git push -u origin <new-branch>`
+
+# when fully done with task: add, commit, push, and open a PR
+`git add .`
+`git commit -m "feat/fix/chore: <describe whole task>"`
+`git push -u origin <new-branch>`
+`gh pr create --fill --base main --head <new-branch>` # creates PR from head to base and fills branch name + list of commits as title/body of PR 
+
+# rebase to latest main
+`git fetch origin`
+`git rebase origin/main`
+`git push --force-with-lease`
+
+# merge as one clean commit
+`gh pr merge --squash --delete-branch` # merge open PR combine all commits into 1 with title & body taken from PR
+
+# finish (squash & clean-up)
+`git switch main`
+`git pull --ff-only` # ff-only is a safety mechanism - ensures that there are no commits on local that aren't on remote
+`git fetch --prune` # keeps origin/ * tidy locally 
+`git branch -D feat/some-task`
+
+
+--- # Workflow when origin push-requests are protected ---
 1. Sync main
 - `git switch main`
 - `git pull --ff-only`
@@ -47,12 +81,23 @@
 - `git pull --ff-only`
 - `git fetch --prune` # keeps origin/ * tidy locally 
 
-# Create a remote repo and connect 
+--- # Create a remote repo and connect ---
 ## Create repo
 `gh repo create <repo-name> --public`
 ## Connect
 `git remote add origin https://github.com/elikent/<repo-name>.git`
 
+--- # Get status ---
+- `git status` # shows changes in working tree not added to staging area and changes staged but not committed
+- `git fetch origin`  # downloads current state of origin
+- `git log oneline main..origin/main` # shows if remote is ahead
+- `git log oneline origin/main..main` # shows if local is ahead
+- `git show <commit-hash>` # get commit header and diff
+- `git show HEAD` # get commit header and diff for HEAD
+- `git show --no-patch <commit-hash> # get metadata only
+- `git show --name-only <commit-hash>` # metadata + file names
+
+---
 
 # Aliases
 ## One-time
@@ -71,8 +116,9 @@ git config --global alias.sw "switch"
 # Other most useful commands
 ## See where you are
 - `git status`
+
 - `git remote -v` # (gives origin for fetch and push)
-- `git branch`
+- `git branch` # gives local branches
 - `git branch -r` # remote branches in local list
 - `git ls-remote --heads origin` # remote branches in remote list
 - `git fetch --prune` # update and prune stale remote-tracking branches
