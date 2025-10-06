@@ -24,6 +24,49 @@
 `git pull --ff-only` # ff-only is a safety mechanism - ensures that there are no commits on local that aren't on remote
 `git fetch --prune` # keeps origin/ * tidy locally 
 
+--- # CREATE A REMOTE REPO & CONNECT ---
+## Create repo
+`gh repo create <repo-name> --public`
+## Connect
+`git remote add origin https://github.com/elikent/<repo-name>.git`
+
+--- # EXPLORE ---
+- `git status` # shows changes in working tree not added to staging area and changes staged but not committed
+- `git fetch origin`  # downloads current state of origin
+- `git log oneline main..origin/main` # shows if remote is ahead
+- `git log oneline origin/main..main` # shows if local is ahead
+- `git show <commit-hash>` # get commit header and diff
+- `git show HEAD` # get commit header and diff for HEAD
+- `git show --no-patch <commit-hash>` # get metadata only
+- `git show --name-only <commit-hash>` # metadata + file names
+- `git remote -v` # (gives origin for fetch and push)
+- Note: `git switch -c tmp origin/some/branch` will 
+
+--- # NAVIGATE ---
+# Navigate to last branch i was on
+- `git switch -`
+
+--- # IF MAIN AND ORIGIN/MAIN DIVERGE---
+# Stash local changes
+- `git stash push -m "WIP before syncing main"`
+# Reset main to origin/main
+- `git switch main`
+- `git fetch origin`
+- `git reset --hard origin/main`
+# Create new branch, pop stash, save => add => commit
+- `git switch -c <branch-name>`
+- `git pip stash{0}`
+- save file(s)
+- `git add .`
+- `git commmit ...`
+# Publish and PR
+- `git push -u origin <branch-name>`
+- `gh pr create .....`
+- `gh pr merge --squash --delete-branch`
+# Update local and tidy
+- `git switch main`
+- `git pull --ff-only`
+- `git fetch --prune`
 
 --- # WORKFLOW FOR COLLAB PROJECTS ---
 # start work on new feature
@@ -75,23 +118,6 @@
 - `git switch main`
 - `git pull --ff-only`
 - `git fetch --prune` # keeps origin/ * tidy locally 
-
---- # Create a remote repo and connect ---
-## Create repo
-`gh repo create <repo-name> --public`
-## Connect
-`git remote add origin https://github.com/elikent/<repo-name>.git`
-
---- # Get info ---
-- `git status` # shows changes in working tree not added to staging area and changes staged but not committed
-- `git fetch origin`  # downloads current state of origin
-- `git log oneline main..origin/main` # shows if remote is ahead
-- `git log oneline origin/main..main` # shows if local is ahead
-- `git show <commit-hash>` # get commit header and diff
-- `git show HEAD` # get commit header and diff for HEAD
-- `git show --no-patch <commit-hash> # get metadata only
-- `git show --name-only <commit-hash>` # metadata + file names
-- `git remote -v` # (gives origin for fetch and push)
 
 ---
 
