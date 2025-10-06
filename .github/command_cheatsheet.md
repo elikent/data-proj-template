@@ -1,58 +1,99 @@
-# Workflow
-1. Sync main
-- `git switch main`
-- `git pull --ff-only`
-- `git fetch --prune` # keeps origin/ * tidy locally 
 
-2. Branch for the new task
-- `git switch -c <branch-type/desc>` # fix, chore or feat (docs, style, refactor, test)
+--- # WORKFLOW FOR SOLO PROJECTS --- 
+# start work on new feature
+`git switch -c <new-branch>`
 
-3. Small chunks and commit often
-- run checks before each commit: `pre-commit run --all-files && pytest -q`
-- `git add <paths> && git commit --amend --no-edit` # when continuing work on same task without a new push
+# checkpoint often
+`git add .`
+`git commit -m "wip: <what you did>"`
 
-4. Keep branch current
-- `git fetch origin`
-- `git rebase origin/main`
+# when done with significant part of task or step away - push to GH
+`git push -u origin <new-branch>` or `git push`
 
-5. Push
-- `git push -u origin <branch-name>`
+# when fully done with task: push => sanity check
+`git add .; git commit -m "feat/fix/chore: <describe whole task>"`
+`git log --oneline --decorate --graph --all` # sanity check
+`git push`
 
-6. Open PR
-- `gh pr create --fill --base main --head <branch-name>` 
-# --fill: auto-fills commit msgs
-# --base main = target branch
-# --head <branch-name> = source branch 
+# open and merge a PR
+`gh pr create --title "feat: <task> --body "short summary" --base main --head <new-branch>` # creates PR from head to base 
+`gh pr merge --squash --delete-branch` # merge open PR combine all commits into 1 with title & body taken from PR
 
-7. Merge (squash)
-- `gh pr merge --squash --delete-branch`
-# -- combines all commits from PR into one commit on main
+# finish (squash & clean-up)
+`git switch main`
+`git pull --ff-only` # ff-only is a safety mechanism - ensures that there are no commits on local that aren't on remote
+`git fetch --prune` # keeps origin/ * tidy locally 
 
-## If worked on main by accident
-1. Move local commit(s) off main 
+
+--- # WORKFLOW FOR COLLAB PROJECTS ---
+# start work on new feature
+`git switch -c <new-branch>`
+
+# checkpoint often
+`git add .`
+`git commit -m "wip: <what you did>"`
+
+# when done with significant part of task or step away - push to GH
+`git push -u origin <new-branch>`
+
+# when fully done with task: push => sanity check
+`git add .; git commit -m "feat/fix/chore: <describe whole task>"`
+`git push`
+`git log --oneline --decorate --graph --all`
+
+# rebase to latest main
+`git fetch origin`
+`git rebase origin/main`  
+`git push --force-with-lease`
+
+# open and merge a PR
+`gh pr create --title "feat: <task> --body "short summary" --base main --head <new-branch>` # creates PR from head to base 
+`gh pr merge --squash --delete-branch` # merge open PR combine all commits into 1 with title & body taken from PR
+
+# finish (squash & clean-up)
+`git switch main`
+`git pull --ff-only` # ff-only is a safety mechanism - ensures that there are no commits on local that aren't on remote
+`git fetch --prune` # keeps origin/ * tidy locally 
+
+
+
+--- # IF WORKED ON MAIN BY ACCIDENT ---
+# Move local commit(s) off main 
 - `git switch -c chore/move-off-main`
 
-2. Reset local to match remote 
+# Reset local to match remote 
 - `git switch main`
 - `git fetch origin`
 - `git reset --hard origin/main`
 
-3. PR the branch back into main
+# PR the branch back into main
 - `git switch chore/move-off-main` 
 - `gh pr create --fill --base main --head chore/move-off-main`
 - `gh pr merge --squash --delete-branch`
 
-4. Sync local main
+# Sync local main
 - `git switch main`
 - `git pull --ff-only`
 - `git fetch --prune` # keeps origin/ * tidy locally 
 
-# Create a remote repo and connect 
+--- # Create a remote repo and connect ---
 ## Create repo
 `gh repo create <repo-name> --public`
 ## Connect
 `git remote add origin https://github.com/elikent/<repo-name>.git`
 
+--- # Get info ---
+- `git status` # shows changes in working tree not added to staging area and changes staged but not committed
+- `git fetch origin`  # downloads current state of origin
+- `git log oneline main..origin/main` # shows if remote is ahead
+- `git log oneline origin/main..main` # shows if local is ahead
+- `git show <commit-hash>` # get commit header and diff
+- `git show HEAD` # get commit header and diff for HEAD
+- `git show --no-patch <commit-hash> # get metadata only
+- `git show --name-only <commit-hash>` # metadata + file names
+- `git remote -v` # (gives origin for fetch and push)
+
+---
 
 # Aliases
 ## One-time
@@ -69,18 +110,6 @@ git config --global alias.nb "switch -c"
 git config --global alias.sw "switch"
 
 # Other most useful commands
-## See where you are
-- `git status`
-- `git remote -v` # (gives origin for fetch and push)
-- `git branch`
-- `git branch -r` # remote branches in local list
-- `git ls-remote --heads origin` # remote branches in remote list
-- `git fetch --prune` # update and prune stale remote-tracking branches
-
-## Start new work
-- `git switch main`
-- `git pull --ff-only`
-
 ## Stage and commit
 - `git add -p path/to/file`  # stage specific hunks
 - `git commit -m "<msg-type: title>"`
