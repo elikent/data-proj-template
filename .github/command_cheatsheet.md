@@ -47,7 +47,14 @@
 # Navigate to last branch i was on
 - `git switch -`
 
---- # IF MAIN AND ORIGIN/MAIN DIVERGE---
+--- # CHECK IF BRANCH IS PROTECTED ---
+# in PS
+- `$repo = gh repo view --json nameWithOwner -q .nameWithOwner`
+- `$branch = "main"`
+- `gh api -H "Accept: application/vnd.github+json" "repos/$repo/branches/$branch/protection"`
+# Note, if no protection, will return Error 404
+
+--- # IF MAIN AHEAD OF ORIGIN/MAIN---
 # Stash local changes
 - `git stash push -m "WIP before syncing main"`
 # Reset main to origin/main
