@@ -43,6 +43,12 @@
 - `git remote -v` # (gives origin for fetch and push)
 - Note: `git switch -c tmp origin/some/branch` will 
 
+--- # EXPLORE REMOTE --
+# get remote heads
+`git ls-remote --heads origin`
+# get all branches
+`git branch -a -vv`
+
 --- # NAVIGATE ---
 # Navigate to last branch i was on
 - `git switch -`
