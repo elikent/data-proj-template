@@ -69,8 +69,7 @@
 - `git reset --hard origin/main`
 # Create new branch, pop stash, save => add => commit
 - `git switch -c <branch-name>`
-- `git pip stash{0}`
-- save file(s)
+- `git stash pop`
 - `git add .`
 - `git commmit ...`
 # Publish and PR
