@@ -1,5 +1,5 @@
 
---- # WORKFLOW FOR SOLO PROJECTS --- 
+--- # WORKFLOW FOR SOLO PROJECTS ---
 # start work on new feature
 `git switch -c <new-branch>`
 
@@ -16,13 +16,13 @@
 `git push`
 
 # open and merge a PR
-`gh pr create --title "feat: <task> --body "short summary" --base main --head <new-branch>` # creates PR from head to base 
+`gh pr create --title "feat: <task> --body "short summary" --base main --head <new-branch>` # creates PR from head to base
 `gh pr merge --squash --delete-branch` # merge open PR combine all commits into 1 with title & body taken from PR
 
 # finish (squash & clean-up)
 `git switch main`
 `git pull --ff-only` # ff-only is a safety mechanism - ensures that there are no commits on local that aren't on remote
-`git fetch --prune` # keeps origin/ * tidy locally 
+`git fetch --prune` # keeps origin/ * tidy locally
 
 --- # CREATE A REMOTE REPO & CONNECT ---
 ## Create repo
@@ -41,7 +41,7 @@
 - `git show --no-patch <commit-hash>` # get metadata only
 - `git show --name-only <commit-hash>` # metadata + file names
 - `git remote -v` # (gives origin for fetch and push)
-- Note: `git switch -c tmp origin/some/branch` will 
+- Note: `git switch -c tmp origin/some/branch` will
 
 --- # EXPLORE REMOTE --
 # get remote heads
@@ -49,9 +49,13 @@
 # get all branches
 `git branch -a -vv`
 
---- # NAVIGATE ---
-# Navigate to last branch i was on
-- `git switch -`
+--- # BACKUPS ---
+# local backup
+`git branch backup/$(date +%Y%m%d-%H%M)`
+# remote checkpoints
+`git tag -a v0.3.0 -m "Stable checkpoint before refactor"`
+`git push origin v0.3.0`
+
 
 --- # CHECK IF BRANCH IS PROTECTED ---
 # in PS
@@ -99,38 +103,38 @@
 
 # rebase to latest main
 `git fetch origin`
-`git rebase origin/main`  
+`git rebase origin/main`
 `git push --force-with-lease`
 
 # open and merge a PR
-`gh pr create --title "feat: <task> --body "short summary" --base main --head <new-branch>` # creates PR from head to base 
+`gh pr create --title "feat: <task> --body "short summary" --base main --head <new-branch>` # creates PR from head to base
 `gh pr merge --squash --delete-branch` # merge open PR combine all commits into 1 with title & body taken from PR
 
 # finish (squash & clean-up)
 `git switch main`
 `git pull --ff-only` # ff-only is a safety mechanism - ensures that there are no commits on local that aren't on remote
-`git fetch --prune` # keeps origin/ * tidy locally 
+`git fetch --prune` # keeps origin/ * tidy locally
 
 
 
 --- # IF WORKED ON MAIN BY ACCIDENT ---
-# Move local commit(s) off main 
+# Move local commit(s) off main
 - `git switch -c chore/move-off-main`
 
-# Reset local to match remote 
+# Reset local to match remote
 - `git switch main`
 - `git fetch origin`
 - `git reset --hard origin/main`
 
 # PR the branch back into main
-- `git switch chore/move-off-main` 
+- `git switch chore/move-off-main`
 - `gh pr create --fill --base main --head chore/move-off-main`
 - `gh pr merge --squash --delete-branch`
 
 # Sync local main
 - `git switch main`
 - `git pull --ff-only`
-- `git fetch --prune` # keeps origin/ * tidy locally 
+- `git fetch --prune` # keeps origin/ * tidy locally
 
 ---
 
@@ -157,7 +161,7 @@ git config --global alias.sw "switch"
 
 ## Publish & branch
 - `git push -u origin my-branch`
-- `git pull --ff-only` 
+- `git pull --ff-only`
 # if diverged
 - `git fetch origin`
 - `git reset --hard origin/main`
