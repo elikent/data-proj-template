@@ -1,4 +1,7 @@
-﻿# TOC
+﻿# data-proj-template
+Template directory for data projects
+
+# TOC
 - Naming conventions
 - File & folder descriptions
 
@@ -38,6 +41,9 @@ What project does and quick-start
 ### CHANGELOG.md
 Human-readable history of notable changes (version/date + bullets)
 *Use when:* tag a release or ship a meaningful change
+
+### CODEMAP.md
+Quick function-level inventory
 
 ### .env.example
 Template for required env vars (no secrets)
@@ -105,3 +111,5 @@ Charts, plots, images
 ### output/exports
 CSV/XLSX extracts for stakeholders
 
+### requirements.lock
+Machine-readable file with all .venv site-packages
