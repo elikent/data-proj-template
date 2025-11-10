@@ -27,7 +27,7 @@
 --- # CREATE A REMOTE REPO & CONNECT ---
 ## Create repo
 `gh repo create <repo-name> --public`
-## Connect
+## After first commit, Connect
 `git remote add origin https://github.com/elikent/<repo-name>.git`
 
 
