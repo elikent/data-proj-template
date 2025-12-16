@@ -4,6 +4,9 @@ data/
 !data/.gitkeep
 # data_samples/# (intentionally not ignored)
 
+# Logs
+logs/
+
 # Outputs
 output/
 !output/.gitkeep

@@ -1,4 +1,7 @@
-﻿# data-proj-template
+﻿# to copy this template directory
+robocopy data-proj-template new-project /E /XD .git .github
+
+# data-proj-template
 Template directory for data projects
 
 # TOC
