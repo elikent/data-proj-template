@@ -42,10 +42,16 @@ python -m venv .venv
 python -V
 ```
 
-## 5. Install tooling + editable package
+## 5. Install tooling, editable package and other tools
 ```powershell
 python -m pip install -U pip setuptools wheel
-pip install -e
+# install this package as an editable install and eli-tools
+pip install -e .
+pip install -e ..\..\eli-tools
+pip install -r requirements.txt
+# install ipykernel
+pip install ipykernel
+# install checking before commits - needs .pre-commit-config.yaml
 pip install pre-commit black ruff pytest
 pre-commit install
 ```
@@ -53,7 +59,7 @@ pre-commit install
 ## 6. Configs & secrets
 - Open `configs/base.yml` and set:
     - [ ]`runtime.as_of_date` -> today's date or desired date run
-    - [ ] `input_dir` / `outpub_dir` -> 
+    - [ ] `input_dir` / `outpub_dir` ->
 - Place any local-only creds in `configs/secrets/` (git-ignored)
 
 ## 7. data/outputs folders (sanity check)
