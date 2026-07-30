@@ -13,7 +13,7 @@ output/
 artifacts/
 
 # Secrets
-config/secrets/
+config/secrets/.env
 
 # Test scripts
 tests/
